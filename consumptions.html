@@ -3,7 +3,7 @@
 <head>
 
   <title>DUB Inventory System</title>
-    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+  <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
@@ -60,13 +60,13 @@
 <!--3 buttons-->
     <div class="row">  
       <div class="col-md-2">
-        <button onclick="document.getElementById('addConsumption').style.display='block'" style="width:auto;" class="btn btn-block btn-primary"><i class="fa fa-plus"></i> Add Consumption</button>
+        <button onclick="document.getElementById('addConsumption').style.display='block'"  class="btn btn-block btn-primary"><i class="fa fa-plus"></i> Add Consumption</button>
+      </div>
+     <div class="col-md-2"> 
+          <button onclick="document.getElementById('deleteConsumption').style.display='block'" class="btn btn-block btn-primary"><i class="fa fa-minus"></i> Delete Consumption</button>
       </div>
       <div class="col-md-2">
-        <button class="btn btn-block btn-primary" href="#">Delete</button>
-      </div>
-      <div class="col-md-2">
-        <button class="btn btn-block btn-primary" href="#">Edit</button>
+        <button onclick="document.getElementById('updateConsumption').style.display='block'" class="btn btn-block btn-primary"><i class="fa fa-edit"></i> Update Consumption</button>
       </div>
     </div>
 
@@ -76,37 +76,27 @@
 <div>
 <table>
   <tr>
-    <th>Date</th>
     <th>Item</th>
-    <th>Supplier</th>
-    <th>Unit</th>
-    <th>Qty</th>
+    <th>Quantity</th>
+    <th>Unit of Measure</th>
+  </tr>
+  <tr>
+    <td>#--</td>
+    <td>#--</td>
+    <td>#--</td>
+  </tr>
+  <tr>
+    <td>#--</td>
+    <td>#--</td>
+    <td>#--</td>
+  </tr>
+  <tr>
+    <td>#--</td>
+    <td>#--</td>
+    <td>#--</td>
 
   </tr>
   <tr>
-    <td>#--</td>
-    <td>#--</td>
-    <td>#--</td>
-    <td>#--</td>
-    <td>#--</td>
-  </tr>
-  <tr>
-    <td>#--</td>
-    <td>#--</td>
-    <td>#--</td>
-    <td>#--</td>
-    <td>#--</td>
-  </tr>
-  <tr>
-    <td>#--</td>
-    <td>#--</td>
-    <td>#--</td>
-    <td>#--</td>
-    <td>#--</td>
-  </tr>
-  <tr>
-    <td>#--</td>
-    <td>#--</td>
     <td>#--</td>
     <td>#--</td>
     <td>#--</td>
@@ -129,32 +119,131 @@
                 <div class="card-body">
                     <form action="" method="post" name="myForm" onsubmit="return validateForm()">
                         <div class="form-group">
-                          <label >Item ID</label>
-                          <select id="item_id" name="item_id" required="">
-                            <option value="supplier 1">1</option>
-                            <option value="supplier 2">2</option>
-                            <option value="supplier 3">3</option>
-                        </select>
+                          <label >Item</label>
+                          <input type="text" placeholder="Item name" name="item" class="form-control" id="item" required="">
                         </div>      
                         <div class="form-group">
                           <label >Quantity</label>
                           <input type="text" placeholder="Quantity" name="quantity" class="form-control" id="quantity" required="">
                         </div>  
-                    </form>           
-                </div>                          
+                        <div class="form-group">
+                          <label >Unit of Measure</label>
+                          <select id="unitofMeasure" name="unitofMeasure" required="">
+                            <option value="unit 1">kilogram</option>
+                            <option value="unit 2">gram</option>
+                            <option value="unit">can</option>
+                            <option value="unit">bottle</option>
+                            <option value="unit">piece</option>
+                            <option value="unit">pack</option>
+                          </select>
+                        </div>         
                         <br>
-                        <input type="submit" name="submit" value ="submit" class="btn btn-primary">
-                        <input type="reset" name="reset" class="btn btn-primary">
+                        <input type="submit" name="submit" value ="Add" class="btn btn-primary" onclick="confirmAdd()">
+                        <input type="reset" name="reset" value ="Reset" class="btn btn-primary">
                         <br>
+                    </form>  
             </div>
         </div>
     </div>
   </div>
+  </div>
   </form>
 </div>
-
-</div>
 <!--end of modal form for add Consumption -->
+
+<!--modal form for delete Consumption  -->
+<div id="deleteConsumption" class="modal">
+  <span onclick="document.getElementById('deleteConsumption').style.display='none'" class="close" title="Close Modal">×</span>
+  <form class="modal-content animate" action="">
+  <div class="addItem-container">
+    <div class="row">
+        <div class="col-8">  <!-- col-6-->
+            <div class="card">
+                <div class="card-header text-center">
+                  <h1 class="mb-5 font-weight-light text-uppercase">Delete Consumption</h1>
+                </div>
+                <div class="card-body">
+                    <form action="" method="post" name="myForm" onsubmit="return validateForm()">
+                        <div class="form-group">
+                          <label >Item</label>
+                          <input type="text" placeholder="Item name" name="item" class="form-control" id="item" required="">
+                        </div>      
+                        <div class="form-group">
+                          <label >Quantity</label>
+                          <input type="text" placeholder="Quantity" name="quantity" class="form-control" id="quantity" required="">
+                        </div>  
+                        <div class="form-group">
+                          <label >Unit of Measure</label>
+                          <select id="unitofMeasure" name="unitofMeasure" required="">
+                            <option value="unit 1">kilogram</option>
+                            <option value="unit 2">gram</option>
+                            <option value="unit">can</option>
+                            <option value="unit">bottle</option>
+                            <option value="unit">piece</option>
+                            <option value="unit">pack</option>
+                          </select>
+                        </div>         
+                        <br>
+                        <input type="submit" name="submit" value ="Delete" class="btn btn-primary" onclick="confirmDelete()">
+                        <input type="reset" name="reset" value ="Reset" class="btn btn-primary">
+                        <br>
+                    </form>  
+            </div>
+        </div>
+    </div>
+  </div>
+  </div>
+  </form>
+</div>
+<!--end of modal form for delete Consumption -->
+</div>
+
+
+<!--modal form for update Consumption  -->
+<div id="updateConsumption" class="modal">
+  <span onclick="document.getElementById('updateConsumption').style.display='none'" class="close" title="Close Modal">×</span>
+  <form class="modal-content animate" action="">
+  <div class="addItem-container">
+    <div class="row">
+        <div class="col-8">  <!-- col-6-->
+            <div class="card">
+                <div class="card-header text-center">
+                  <h1 class="mb-5 font-weight-light text-uppercase">Update Consumption</h1>
+                </div>
+                <div class="card-body">
+                    <form action="" method="post" name="myForm" onsubmit="return validateForm()">
+                        <div class="form-group">
+                          <label >Item</label>
+                          <input type="text" placeholder="Item name" name="item" class="form-control" id="item" required="">
+                        </div>      
+                        <div class="form-group">
+                          <label >Quantity</label>
+                          <input type="text" placeholder="Quantity" name="quantity" class="form-control" id="quantity" required="">
+                        </div>  
+                        <div class="form-group">
+                          <label >Unit of Measure</label>
+                          <select id="unitofMeasure" name="unitofMeasure" required="">
+                            <option value="unit 1">kilogram</option>
+                            <option value="unit 2">gram</option>
+                            <option value="unit">can</option>
+                            <option value="unit">bottle</option>
+                            <option value="unit">piece</option>
+                            <option value="unit">pack</option>
+                          </select>
+                        </div>         
+                        <br>
+                        <input type="submit" name="submit" value ="Update" class="btn btn-primary" onclick="confirmUpdate()">
+                        <input type="reset" name="reset" value ="Reset" class="btn btn-primary">
+                        <br>
+                    </form>  
+            </div>
+        </div>
+    </div>
+  </div>
+  </div>
+  </form>
+</div>
+<!--end of modal form for update Consumption -->
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -169,8 +258,37 @@ $(document).ready(function () {
         });
 
 </script>
+
 <script src="main.js"></script>
 
+<!-- add confirmation message-->
+<script>
+  function confirmAdd() {
+    alert("Add consumption success!");
+  }
+</script>
+
+<!-- delete confirmation message-->
+<script>
+  function confirmDelete() {
+   var result= confirm("Are you sure to delete an item?");
+     if(result == true)
+     {
+        return true;
+     }
+      else 
+      {
+        return false;
+      } 
+  }
+</script>
+
+<!-- update confirmation message-->
+<script>
+  function confirmUpdate() {
+    alert("Update consumption success!");
+  }
+</script>
 
 </body>
 </html>

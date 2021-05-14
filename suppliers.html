@@ -55,13 +55,13 @@
 <!--3 buttons-->
     <div class="row">  
       <div class="col-md-2">
-        <button onclick="document.getElementById('addSupplier').style.display='block'" style="width:auto;" class="btn btn-block btn-primary"><i class="fa fa-plus"></i> Add Supplier</button>
+        <button onclick="document.getElementById('addSupplier').style.display='block'"  class="btn btn-block btn-primary"><i class="fa fa-plus"></i> Add Supplier</button>
       </div>
       <div class="col-md-2">
-        <button class="btn btn-block btn-primary" href="#">Delete Supplier</button>
+        <button onclick="document.getElementById('deleteSupplier').style.display='block'" class="btn btn-block btn-primary"><i class="fa fa-minus"></i> Delete Supplier</button>
       </div>
       <div class="col-md-2">
-        <button class="btn btn-block btn-primary" href="#">Update Supplier</button>
+        <button onclick="document.getElementById('updateSupplier').style.display='block'" class="btn btn-block btn-primary"><i class="fa fa-edit"></i> Update Supplier</button>
       </div>
     </div>
 
@@ -74,9 +74,10 @@
   <tr>
     <th>Name</th>
     <th>Address</th>
-    <th>Status</th>
-    <th>Mode of Payment</th>
-    <th>Credit terms</th>
+    <th>Contact Person</th>
+    <th>Contact Number</th>
+    <th>Payment Mode</th>
+    <th>Credit Term</th>
 
   </tr>
   <tr>
@@ -85,12 +86,6 @@
     <td>#--</td>
     <td>#--</td>
     <td>#--</td>
-  </tr>
-  <tr>
-    <td>#--</td>
-    <td>#--</td>
-    <td>#--</td>
-    <td>#--</td>
     <td>#--</td>
   </tr>
   <tr>
@@ -99,8 +94,18 @@
     <td>#--</td>
     <td>#--</td>
     <td>#--</td>
+    <td>#--</td>
   </tr>
   <tr>
+    <td>#--</td>
+    <td>#--</td>
+    <td>#--</td>
+    <td>#--</td>
+    <td>#--</td>
+    <td>#--</td>
+  </tr>
+  <tr>
+    <td>#--</td>
     <td>#--</td>
     <td>#--</td>
     <td>#--</td>
@@ -131,10 +136,26 @@
                         <div class="form-group">
                           <label >Address</label>
                           <input type="text" placeholder="Address" name="address" class="form-control" id="address" required="">
-                        </div>              
+                        </div>
+                        <div class="form-group">
+                          <label >Contact Person</label>
+                          <input type="text" placeholder="Someone" name="contact_person" class="form-control" id="contact_person" required="">
+                        </div>    
+                        <div class="form-group">
+                          <label >Contact Number</label>
+                          <input type="text" placeholder="Phone or mobile number" name="contact_number" class="form-control" id="contact_number" required="">
+                        </div>      
+                        <div class="form-group">
+                          <label >Payment Mode</label>
+                          <input type="text" placeholder="Ex. cash" name="payment_mode" class="form-control" id="payment_mode" required="">
+                        </div>     
+                        <div class="form-group">
+                          <label >Credit Term</label>
+                          <input type="text" placeholder="credit term" name="credit_term" class="form-control" id="credit_term" required="">
+                        </div>         
                         <br>
-                        <input type="submit" name="submit" value ="submit" class="btn btn-primary">
-                        <input type="reset" name="reset" class="btn btn-primary">
+                        <input type="submit" name="submit" value ="Add" class="btn btn-primary" onclick="confirmAdd()" >
+                        <input type="reset" name="reset" value ="Reset"class="btn btn-primary">
                         <br>
                     </form>
                 </div>
@@ -145,6 +166,103 @@
 </form>   
 </div>
 <!--end of modal form for add Supplier  -->
+
+<!--modal form for delete Supplier -->
+<div id="deleteSupplier" class="modal">
+  <span onclick="document.getElementById('deleteSupplier').style.display='none'" class="close" title="Close Modal">×</span>
+<form class="modal-content animate" action="">
+<div class="addItem-container">
+    <div class="row">
+        <div class="col-8">  <!-- col-6-->
+            <div class="card">
+                <div class="card-header text-center">
+                  <h1 class="mb-5 font-weight-light text-uppercase">Delete Supplier</h1>
+                </div>
+                <div class="card-body">
+                    <form action="" method="post" name="myForm" onsubmit="return validateForm()">
+                        <div class="form-group">
+                          <label >Supplier Name</label>
+                          <input type="text" placeholder="Supplier name" name="name" class="form-control" id="name" required="">
+                        </div>   
+                        <div class="form-group">
+                          <label >Address</label>
+                          <input type="text" placeholder="Address" name="address" class="form-control" id="address" required="">
+                        </div>
+                        <div class="form-group">
+                          <label >Contact Person</label>
+                          <input type="text" placeholder="Someone" name="contact_person" class="form-control" id="contact_person" required="">
+                        </div>    
+                        <div class="form-group">
+                          <label >Contact Number</label>
+                          <input type="text" placeholder="Phone or mobile number" name="contact_number" class="form-control" id="contact_number" required="">
+                        </div>                  
+                        <br>
+                        <input type="submit" name="submit" value ="Delete" class="btn btn-primary" onclick="confirmDelete()">
+                        <input type="reset" name="reset" value ="Reset"class="btn btn-primary">
+                        <br>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>   
+</div>
+<!--end of modal form for delete Supplier  -->
+
+<!--modal form for update Supplier -->
+<div id="updateSupplier" class="modal">
+  <span onclick="document.getElementById('updateSupplier').style.display='none'" class="close" title="Close Modal">×</span>
+<form class="modal-content animate" action="">
+<div class="addItem-container">
+    <div class="row">
+        <div class="col-8">  <!-- col-6-->
+            <div class="card">
+                <div class="card-header text-center">
+                  <h1 class="mb-5 font-weight-light text-uppercase">Update Supplier</h1>
+                </div>
+                <div class="card-body">
+                    <form action="" method="post" name="myForm" onsubmit="return validateForm()">
+                        <div class="form-group">
+                          <label >Supplier Name</label>
+                          <input type="text" placeholder="Supplier name" name="name" class="form-control" id="name" required="">
+                        </div>      
+                        <div class="form-group">
+                          <label >Address</label>
+                          <input type="text" placeholder="Address" name="address" class="form-control" id="address" required="">
+                        </div>
+                        <div class="form-group">
+                          <label >Contact Person</label>
+                          <input type="text" placeholder="Someone" name="contact_person" class="form-control" id="contact_person" required="">
+                        </div>    
+                        <div class="form-group">
+                          <label >Contact Number</label>
+                          <input type="text" placeholder="Phone or mobile number" name="contact_number" class="form-control" id="contact_number" required="">
+                        </div>      
+                        <div class="form-group">
+                          <label >Payment Mode</label>
+                          <input type="text" placeholder="Ex. cash" name="payment_mode" class="form-control" id="payment_mode" required="">
+                        </div>     
+                        <div class="form-group">
+                          <label >Credit Term</label>
+                          <input type="text" placeholder="credit term" name="credit_term" class="form-control" id="credit_term" required="">
+                        </div>         
+                        <br>
+                        <input type="submit" name="submit" value ="Update" class="btn btn-primary" onclick="confirmUpdate()" >
+                        <input type="reset" name="reset" value ="Reset"class="btn btn-primary">
+                        <br>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>   
+</div>
+<!--end of modal form for update Supplier  -->
+
+
+
 </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -161,6 +279,34 @@ $(document).ready(function () {
 </script>
 <script src="main.js"></script>
 
+<!-- add confirmation message-->
+<script>
+  function confirmAdd() {
+    alert("Add supplier success!");
+  }
+</script>
+
+<!-- delete confirmation message-->
+<script>
+  function confirmDelete() {
+   var result= confirm("Are you sure to delete an item?");
+     if(result == true)
+     {
+        return true;
+     }
+      else 
+      {
+        return false;
+      } 
+  }
+</script>
+
+<!-- update confirmation message-->
+<script>
+  function confirmUpdate() {
+    alert("Update supplier success!");
+  }
+</script>
 
 </body>
 </html>

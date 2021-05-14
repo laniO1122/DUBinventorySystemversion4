@@ -8,144 +8,267 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
-  
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="main.js" defer></script>
+
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="wrapper">
- <nav id="sidebar">
-   <div class="sidebar-header">
-    <h3>DUB Inventory System</h3>
-    <div class="logout">
-        <a href="#">#username</a>
-        <a href="login.html" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Log Out</a>
-    </div>
-   </div>  
-   <ul class="lisst-unstyled components">
-        <li class="active">
-            <a href="index.html" ><span class="las la-list-alt"></span><span> Inventory</span></a>
-        </li>
-        <li>
-             <a href="suppliers.html"><span class="las la-truck"></span><span> Suppliers</span></a>
-        </li>
-        <li>
-            <a href="purchases.html"><span class="las la-folder-plus"></span><span> Purchases</span></a>
-        </li>
-        <li>
-            <a href="consumptions.html"><span class="las la-folder-minus"></span><span> Consumptions</span></a>
-        </li>
-        <li>
-            <a href="writeOffs.html"><span class="las la-clipboard-list"></span><span> Write-Offs</span></a>
-        </li>
+   <nav id="sidebar">
+     <div class="sidebar-header">
+      <h3>DUB Inventory System</h3>
+      <div class="logout">
+          <a href="#">#username</a>
+          <a href="login.html" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Log Out</a>
+      </div>
+     </div>
+     <ul class="lisst-unstyled components">
+          <li class="active">
+              <a href="index.html" ><span class="las la-list-alt"></span><span> Inventory</span></a>
+          </li>
+          <li>
+               <a href="suppliers.html"><span class="las la-truck"></span><span> Suppliers</span></a>
+          </li>
+          <li>
+              <a href="purchases.html"><span class="las la-folder-plus"></span><span> Purchases</span></a>
+          </li>
+          <li>
+              <a href="consumptions.html"><span class="las la-folder-minus"></span><span> Consumptions</span></a>
+          </li>
+          <li>
+              <a href="writeOffs.html"><span class="las la-clipboard-list"></span><span> Write-Offs</span></a>
+          </li>
 
-   </ul>
- </nav>
-<br><br>
-<!-- codes for a menu button-->
-<div id="content">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <button type="button" id="sidebarCollapse" class="btn  btn-primary">
-        <i class="fas fa-align-left"></i>
-        <span>Menu</span>
-      </button>
-    </div>
-  </nav>
+     </ul>
+   </nav>
+  <br><br>
+  <!-- codes for a menu button-->
+  <div id="content">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <button type="button" id="sidebarCollapse" class="btn  btn-primary">
+          <i class="fas fa-align-left"></i>
+          <span>Menu</span>
+        </button>
+      </div>
+    </nav>
 
-  <!-- codes for a filters  with 2 search boxes-->
-<div class="row">
-    <div class="col-md-3"><h3 >Filter</h3></div>
-    
-<div class="col-md-3">
-    <div class="form-group">
-        <label>Category</label>
-        <select id="unitofMeasure" name="unitofMeasure" required="">
-          <option value="Category 1">Category 1</option>
-          <option value="Category 2">Category 2</option>
-          <option value="Category 3">Category 3</option>
-        </select>
-    </div>    
+    <!-- codes for a filters  with 2 search boxes-->
+  <div class="row">
+      <div class="col-md-3"><h3 >Filter</h3></div>
+
+  <div class="col-md-3">
       <div class="form-group">
-        <label>Supplier</label>
-        <select id="unitofMeasure" name="unitofMeasure" required="">
-          <option value="Supplier 1">Supplier 1</option>
-          <option value="Supplier 2">Supplier 2</option>
-          <option value="Supplier 3">Supplier 3</option>  
-        </select>
-      </div>    
-</div>
-  
-</div>
-
-<!--codes for for Add item button-->
-<div>
-  <br>
-    <button onclick="document.getElementById('addItem').style.display='block'" style="width:auto;" class="btn btn-primary"><i class="fa fa-plus"></i> Add Item</button>
-</div>
-<br>
-
-<!--  codes for table  -->
-<div>
-  <table>
-    <tr>
-      <th>Item Name</th>
-      <th>Category</th>
-      <th>Supplier</th>
-      <th>Current Level</th>
-  
-    </tr>
-    <tr>
-      <td>--</td>
-      <td>--</td>
-      <td>--</td>
-      <td>--</td>
-    </tr>
-    <tr>
-      <td>--</td>
-      <td>--</td>
-      <td>--</td>
-      <td>--</td>
-    </tr>
-    <tr>
-      <td>--</td>
-      <td>--</td>
-      <td>--</td>
-      <td>--</td>
-    </tr>
-    <tr>
-     <td>--</td>
-      <td>--</td>
-      <td>--</td>
-      <td>--</td>
-    </tr>
-  </table>
+          <label>Category</label>
+          <select id="unitofMeasure" name="unitofMeasure" required="">
+            <option value="Category 1">Category 1</option>
+            <option value="Category 2">Category 2</option>
+            <option value="Category 3">Category 3</option>
+          </select>
+      </div>
+        <div class="form-group">
+          <label>Supplier</label>
+          <select id="unitofMeasure" name="unitofMeasure" required="">
+            <option value="Supplier 1">Supplier 1</option>
+            <option value="Supplier 2">Supplier 2</option>
+            <option value="Supplier 3">Supplier 3</option>
+          </select>
+        </div>
   </div>
-  
-<!--modal form for Add item -->
-<div id="addItem" class="modal">
-  <span onclick="document.getElementById('addItem').style.display='none'" class="close" title="Close Modal">×</span>
+
+  </div>
+
+  <!--codes for for 3  buttons -->
+  <div class="row">  
+  <div class="col-md-2">
+      <button onclick="document.getElementById('addItem').style.display='block'"  class="btn btn-block btn-primary" ><i class="fa fa-plus"></i> Add Item</button>
+  </div>
+  <div class="col-md-2">
+    <button onclick="document.getElementById('deleteItem').style.display='block'" class="btn btn-block btn-primary"><i class="fa fa-minus"></i> Delete Item</button>
+  </div>
+  <div class="col-md-2">
+    <button onclick="document.getElementById('updateItem').style.display='block'" class="btn btn-block btn-primary"><i class="fa fa-edit"></i> Update Item</button>
+  </div>
+  </div>
+  <br>
+
+  <!--  codes for table  -->
+  <div>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Quantity</th>
+        <th>Unit of Measure</th>
+      </tr>
+      <tr>
+        <td>--</td>
+        <td>--</td>
+        <td>--</td>
+        <td>--</td>
+        <td>--</td>
+      </tr>
+      <tr>
+        <td>--</td>
+        <td>--</td>
+        <td>--</td>
+        <td>--</td>
+        <td>--</td>
+      </tr>
+      <tr>
+        <td>--</td>
+        <td>--</td>
+        <td>--</td>
+        <td>--</td>
+        <td>--</td>
+      </tr>
+      <tr>
+       <td>--</td>
+        <td>--</td>
+        <td>--</td>
+        <td>--</td>
+        <td>--</td>
+      </tr>
+    </table>
+    </div>
+
+  <!--modal form for Add item -->
+  <div id="addItem" class="modal">
+    <span onclick="document.getElementById('addItem').style.display='none'" class="close" title="Close Modal">×</span>
+  <form class="modal-content animate" action="">
+  <div class="addItem-container">
+      <div class="row">
+          <div class="col-8">  <!-- col-6-->
+              <div class="card">
+                  <div class="card-header text-center">
+                    <h1 class="mb-5 font-weight-light text-uppercase">Add item</h1>
+                  </div>
+                  <div class="card-body">
+                      <form action="" method="post" name="myForm" onsubmit="">
+                          <div class="form-group">
+                            <label >Name</label>
+                            <input type="text" placeholder="Item name" name="item_name" class="form-control" id="name" required="">
+                          </div>
+                          <div class="form-group">
+                            <label >Category</label>
+                            <input type="text" placeholder="Item Category" name="category" class="form-control" id="category" required="">
+                          </div>
+                          <div class="form-group">
+                            <label >Description</label>
+                            <input type="text" placeholder="Item Description" name="description" class="form-control" id="description" required="">
+                          </div>
+                          <div class="form-group">
+                            <label >Quantity</label>
+                            <input type="text" placeholder="Item Quantity" name="quantity" class="form-control" id="quantity" required="">
+                          </div>
+                          <div class="form-group">
+                            <label >Unit of Measure</label>
+                            <select id="unitofMeasure" name="unitofMeasure" required="">
+                              <option value="unit 1">kilogram</option>
+                              <option value="unit 2">gram</option>
+                              <option value="unit">can</option>
+                              <option value="unit">bottle</option>
+                              <option value="unit">piece</option>
+                              <option value="unit">pack</option>
+                            </select>
+                          </div>
+                          <br>
+                          <input type="submit" name="submit" value ="Add" class="btn btn-primary" onclick="confirmAdd()">
+                          <input type="reset" name="reset" value ="Reset"class="btn btn-primary">
+                          <br>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  </form>
+  </div>
+  <!--end of modal form for Add item -->
+
+   <!--modal form for Delete item -->
+<div id="deleteItem" class="modal">
+    <span onclick="document.getElementById('deleteItem').style.display='none'" class="close" title="Close Modal">×</span>
+  <form class="modal-content animate" action="">
+  <div class="addItem-container">
+      <div class="row">
+          <div class="col-8">  <!-- col-6-->
+              <div class="card">
+                  <div class="card-header text-center">
+                    <h1 class="mb-5 font-weight-light text-uppercase">Delete Item</h1>
+                  </div>
+                  <div class="card-body">
+                      <form action="" method="post" name="myForm" onsubmit="">
+                          <div class="form-group">
+                            <label >Name</label>
+                            <input type="text" placeholder="Item name" name="item_name" class="form-control" id="name" required="">
+                          </div>
+                          <div class="form-group">
+                            <label >Category</label>
+                            <input type="text" placeholder="Item Category" name="category" class="form-control" id="category" required="">
+                          </div>
+                          <div class="form-group">
+                            <label >Quantity</label>
+                            <input type="text" placeholder="Item Quantity" name="quantity" class="form-control" id="quantity" required="">
+                          </div>
+                          <div class="form-group">
+                            <label >Unit of Measure</label>
+                            <select id="unitofMeasure" name="unitofMeasure" required="">
+                              <option value="unit 1">kilogram</option>
+                              <option value="unit 2">gram</option>
+                              <option value="unit">can</option>
+                              <option value="unit">bottle</option>
+                              <option value="unit">piece</option>
+                              <option value="unit">pack</option>
+                            </select>
+                          </div>
+                          <br>
+                          <input type="submit" name="submit" value ="Delete" class="btn btn-primary" onclick="confirmDelete()">
+                          <input type="reset" name="reset" value ="Reset"class="btn btn-primary">
+                          <br>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  </form>
+  </div>
+  <!--end of modal form for Delete item -->
+
+<!--modal form for update item -->
+<div id="updateItem" class="modal">
+  <span onclick="document.getElementById('updateItem').style.display='none'" class="close" title="Close Modal">×</span>
 <form class="modal-content animate" action="">
 <div class="addItem-container">
     <div class="row">
         <div class="col-8">  <!-- col-6-->
             <div class="card">
                 <div class="card-header text-center">
-                  <h1 class="mb-5 font-weight-light text-uppercase">Add item</h1>
+                  <h1 class="mb-5 font-weight-light text-uppercase">Update item</h1>
                 </div>
                 <div class="card-body">
                     <form action="" method="post" name="myForm" onsubmit="">
                         <div class="form-group">
-                          <label >Item Name</label>
+                          <label >Name</label>
                           <input type="text" placeholder="Item name" name="item_name" class="form-control" id="name" required="">
-                        </div>      
+                        </div>
                         <div class="form-group">
-                          <label >Category ID</label>
-                          <select id="category_id" name="category_id" required="">
-                              <option value="category 1">1</option>
-                              <option value="category 2">2</option>
-                              <option value="category 3">3</option>
-                          </select>
-                        </div>   
+                          <label >Category</label>
+                          <input type="text" placeholder="Item Category" name="category" class="form-control" id="category" required="">
+                        </div>
+                        <div class="form-group">
+                          <label >Description</label>
+                          <input type="text" placeholder="Item Description" name="description" class="form-control" id="description" required="">
+                        </div>
+                        <div class="form-group">
+                          <label >Quantity</label>
+                          <input type="text" placeholder="Item Quantity" name="quantity" class="form-control" id="quantity" required="">
+                        </div>
                         <div class="form-group">
                           <label >Unit of Measure</label>
                           <select id="unitofMeasure" name="unitofMeasure" required="">
@@ -156,10 +279,10 @@
                             <option value="unit">piece</option>
                             <option value="unit">pack</option>
                           </select>
-                        </div>                          
+                        </div>
                         <br>
-                        <input type="submit" name="submit" value ="submit" class="btn btn-primary">
-                        <input type="reset" name="reset" class="btn btn-primary">
+                        <input type="submit" name="submit" value ="Update" class="btn btn-primary" onclick="confirmUpdate()">
+                        <input type="reset" name="reset" value ="Reset"class="btn btn-primary">
                         <br>
                     </form>
                 </div>
@@ -167,22 +290,60 @@
         </div>
     </div>
 </div>
-</form>   
+</form>
 </div>
-<!--end of modal form for Add item -->
+<!--end of modal form for update item -->
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</div>
 
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+
+  <script>
+  $(document).ready(function () {
+              $('#sidebarCollapse').on('click', function () {
+                  $('#sidebar').toggleClass('active');
+              });
+          });
+  </script>
+
+  <script type="text/javascript">
+    console.log('baseURL:', axios.defaults.baseURL);
+    console.log('X-Auth-Token:', axios.defaults.headers.common['Authorization']);
+    console.log('defaults', axios.defaults);
+  </script>
+
+<!-- add confirmation message-->
 <script>
-$(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-            });
-        });
+  function confirmAdd() {
+    alert("Add item success!");
+  }
 </script>
-<script src="main.js"></script>
+
+
+<!-- delete confirmation message-->
+<script>
+  function confirmDelete() {
+   var result= confirm("Are you sure to delete an item?");
+     if(result == true)
+     {
+        return true;
+     }
+      else 
+      {
+        return false;
+      } 
+  }
+</script>
+<!-- update confirmation message-->
+<script>
+  function confirmUpdate() {
+    alert("Update item success!");
+  }
+</script>
 
 </body>
 </html>
